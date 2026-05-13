@@ -1,37 +1,32 @@
 # Nepali Text Summarizer
 
-Abstractive text summarization for the Nepali language using fine-tuned mBART transformer model.
+Automatic summarization of Nepali news articles using NLP techniques.
+Nepali is a low-resource language with limited NLP support, making summarization
+a challenging task. This project explores both extractive and abstractive approaches
+to find the most effective solution.
 
-## Overview
-Fine-tuned `facebook/mbart-large-50` on a custom Nepali news dataset using 
-LoRA (Low-Rank Adaptation) for efficient training.
+## Approaches
 
-## Model Details
-- Base model: `facebook/mbart-large-50`
-- Fine-tuning method: LoRA (r=16, alpha=32)
-- Language: Nepali (`ne_NP`)
-- Task: Abstractive Summarization
+**Extractive:** Sentences are scored and selected from the original text using a
+combination of TF-IDF, TextRank (graph-based PageRank), and semantic sentence
+embeddings. Final score is a weighted combination of all three methods.
 
-## Results
+**Abstractive:** Transformer models are fine-tuned to generate new human-like
+summaries. Experimented with mT5-small (with and without LoRA) before settling
+on mBART-large-50 with LoRA as the final model. mBART was chosen due to its
+multilingual pretraining on 50 languages including Nepali (`ne_NP`), giving it
+a stronger foundation for low-resource summarization.
 
-**Training Loss**
-| Epoch | Training Loss | Validation Loss |
-|-------|--------------|-----------------|
-| 1     | 1.5116       | 1.7374          |
-| 2     | 1.4108       | 1.3529          |
-| 3     | 1.3360       | 1.3398          |
+## Results (mBART)
 
-**ROUGE Scores**
-| Metric   | Precision | Recall | F1     |
-|----------|-----------|--------|--------|
-| ROUGE-1  | 0.507     | 0.571  | 0.537  |
-| ROUGE-2  | 0.278     | 0.324  | 0.299  |
-| ROUGE-L  | 0.451     | 0.508  | 0.478  |
+| Metric  | Precision | Recall | F1    |
+|---------|-----------|--------|-------|
+| ROUGE-1 | 0.507     | 0.571  | 0.537 |
+| ROUGE-2 | 0.278     | 0.324  | 0.299 |
+| ROUGE-L | 0.451     | 0.508  | 0.478 |
+
 ## Tech Stack
-- Python, HuggingFace Transformers
-- PEFT (LoRA), mBART
-- Google Colab (GPU)
+Python, HuggingFace Transformers, PEFT (LoRA), sentence-transformers, Google Colab
 
 ## Dataset
-Nepali news articles with summaries, sourced from Kaggle.  
-Dataset: (https://www.kaggle.com/datasets/adarsh203/nepali-news-article-with-summary))
+[Nepali News Article with Summary](https://www.kaggle.com/datasets/adarsh203/nepali-news-article-with-summary)
