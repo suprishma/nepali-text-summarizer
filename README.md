@@ -13,12 +13,20 @@ LoRA (Low-Rank Adaptation) for efficient training.
 - Task: Abstractive Summarization
 
 ## Results
+
+**Training Loss**
 | Epoch | Training Loss | Validation Loss |
 |-------|--------------|-----------------|
 | 1     | 1.5116       | 1.7374          |
 | 2     | 1.4108       | 1.3529          |
 | 3     | 1.3360       | 1.3398          |
 
+**ROUGE Scores**
+| Metric   | Precision | Recall | F1     |
+|----------|-----------|--------|--------|
+| ROUGE-1  | 0.507     | 0.571  | 0.537  |
+| ROUGE-2  | 0.278     | 0.324  | 0.299  |
+| ROUGE-L  | 0.451     | 0.508  | 0.478  |
 ## Tech Stack
 - Python, HuggingFace Transformers
 - PEFT (LoRA), mBART
